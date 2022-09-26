@@ -1,38 +1,30 @@
-using System;
-using System.Text;
+#include<stdio.h>
  
-public class CaesarCipher
+int main()
 {
-    // Encrypts text using a shift od s
-    public static StringBuilder encrypt(String text, int s)
-    {
-        StringBuilder result= new StringBuilder();
- 
-        for (int i=0; i<text.Length; i++)
-        {
-            if (char.IsUpper(text[i]))
-            {
-                char ch = (char)(((int)text[i] +
-                                s - 65) % 26 + 65);
-                result.Append(ch);
-            }
-            else
-            {
-                char ch = (char)(((int)text[i] +
-                                s - 97) % 26 + 97);
-                result.Append(ch);
-            }
-        }
-        return result;
-    }
- 
-    // Driver code
-    public static void Main(String[] args)
-    {
-        String text = "ATTACKATONCE";
-        int s = 4;
-        Console.WriteLine("Text : " + text);
-        Console.WriteLine("Shift : " + s);
-        Console.WriteLine("Cipher: " + encrypt(text, s));
-    }
+char message[100], ch;
+int i, key;
+printf("Enter a message to encrypt: ");
+gets(message);
+printf("Enter key: ");
+scanf("%d", &key);
+for(i = 0; message[i] != '\0'; ++i){
+ch = message[i];
+if(ch >= 'a' && ch <= 'z'){
+ch = ch + key;
+if(ch > 'z'){
+ch = ch - 'z' + 'a' - 1;
+}
+message[i] = ch;
+}
+else if(ch >= 'A' && ch <= 'Z'){
+ch = ch + key;
+if(ch > 'Z'){
+ch = ch - 'Z' + 'A' - 1;
+}
+message[i] = ch;
+}
+}
+printf("Encrypted message: %s", message);
+return 0;
 }
